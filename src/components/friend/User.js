@@ -8,8 +8,8 @@ const User = (props) => {
   return (
     <div className="add-friend__list-item" onClick={selectUser(user)}>
       <div className="add-friend__list-item-left">
-        <img src={user.avatar} alt={user.fullname} />
-        <span>{user.fullname}</span>
+        <img src={user.avatar} alt={user.username} />
+        <span>{user.username}</span>
       </div>
     </div>
   );

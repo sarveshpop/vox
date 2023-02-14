@@ -1,9 +1,9 @@
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState, useContext } from "react";
 import SubHeader from "./SubHeader";
-import Pending from './Pending';
-import NotFound from './NotFound';
-import Context from '../../context';
-import { realTimeDb } from '../../firebase';
+import Pending from "./Pending";
+import NotFound from "./NotFound";
+import Context from "../../context";
+import { realTimeDb } from "../../firebase";
 
 const Pendings = () => {
   const [authenticatedUser, setAuthenticatedUser] = useState(null);
@@ -19,7 +19,7 @@ const Pendings = () => {
     return () => {
       setAuthenticatedUser(null);
       setUsers(null);
-    }
+    };
   }, [loadCurrentUser]);
 
   useEffect(() => {
@@ -30,16 +30,21 @@ const Pendings = () => {
 
   loadCurrentUser = () => {
     setIsLoading(true);
-    const user = JSON.parse(localStorage.getItem('auth'));
-    realTimeDb.ref().child('users').orderByChild('email').equalTo(user.email).on("value", function (snapshot) {
-      const val = snapshot.val();
-      if (val) {
-        const keys = Object.keys(val);
-        const user = val[keys[0]];
-        setAuthenticatedUser(user);
-        setIsLoading(false);
-      }
-    });
+    const user = JSON.parse(localStorage.getItem("auth"));
+    realTimeDb
+      .ref()
+      .child("users")
+      .orderByChild("email")
+      .equalTo(user.email)
+      .on("value", function (snapshot) {
+        const val = snapshot.val();
+        if (val) {
+          const keys = Object.keys(val);
+          const user = val[keys[0]];
+          setAuthenticatedUser(user);
+          setIsLoading(false);
+        }
+      });
   };
 
   loadPendingRequests = () => {
@@ -47,15 +52,20 @@ const Pendings = () => {
       return;
     }
     setIsLoading(true);
-    realTimeDb.ref().child('users').orderByChild('email').equalTo(authenticatedUser.email).on("value", function (snapshot) {
-      const val = snapshot.val();
-      if (val) {
-        const keys = Object.keys(val);
-        const user = val[keys[0]];
-        setUsers(() => user.pending ? user.pending : []);
-        setIsLoading(false);
-      }
-    });
+    realTimeDb
+      .ref()
+      .child("users")
+      .orderByChild("email")
+      .equalTo(authenticatedUser.email)
+      .on("value", function (snapshot) {
+        const val = snapshot.val();
+        if (val) {
+          const keys = Object.keys(val);
+          const user = val[keys[0]];
+          setUsers(() => (user.pending ? user.pending : []));
+          setIsLoading(false);
+        }
+      });
   };
 
   const updateUser = async (user) => {
@@ -69,7 +79,10 @@ const Pendings = () => {
     if (!selectedUser || !authenticatedUser) {
       return;
     }
-    selectedUser.waiting = selectedUser.waiting && selectedUser.waiting.length ? selectedUser.waiting.filter(w => w.id !== authenticatedUser.id) : [];
+    selectedUser.waiting =
+      selectedUser.waiting && selectedUser.waiting.length
+        ? selectedUser.waiting.filter((w) => w.id !== authenticatedUser.id)
+        : [];
     await updateUser(selectedUser);
   };
 
@@ -77,7 +90,10 @@ const Pendings = () => {
     if (!selectedUser || !authenticatedUser) {
       return;
     }
-    authenticatedUser.pending = authenticatedUser.pending && authenticatedUser.pending.length ? authenticatedUser.pending.filter(p => p.id !== selectedUser.id) : [];
+    authenticatedUser.pending =
+      authenticatedUser.pending && authenticatedUser.pending.length
+        ? authenticatedUser.pending.filter((p) => p.id !== selectedUser.id)
+        : [];
     await updateUser(authenticatedUser);
   };
 
@@ -85,11 +101,27 @@ const Pendings = () => {
     if (!selectedUser || !authenticatedUser) {
       return;
     }
-    const authenticatedUserFriend = { id: authenticatedUser.id, fullname: authenticatedUser.fullname, email: authenticatedUser.email, avatar: authenticatedUser.avatar };
-    const selectedUserFriend = { id: selectedUser.id, fullname: selectedUser.fullname, email: selectedUser.email, avatar: selectedUser.avatar };
+    const authenticatedUserFriend = {
+      id: authenticatedUser.id,
+      username: authenticatedUser.username,
+      email: authenticatedUser.email,
+      avatar: authenticatedUser.avatar,
+    };
+    const selectedUserFriend = {
+      id: selectedUser.id,
+      username: selectedUser.username,
+      email: selectedUser.email,
+      avatar: selectedUser.avatar,
+    };
 
-    authenticatedUser.friends = authenticatedUser.friends && authenticatedUser.friends.length ? [...authenticatedUser.friends, selectedUserFriend] : [selectedUserFriend];
-    selectedUser.friends = selectedUser.friends && selectedUser.friends.length ? [...selectedUser.friends, authenticatedUserFriend] : [authenticatedUserFriend];
+    authenticatedUser.friends =
+      authenticatedUser.friends && authenticatedUser.friends.length
+        ? [...authenticatedUser.friends, selectedUserFriend]
+        : [selectedUserFriend];
+    selectedUser.friends =
+      selectedUser.friends && selectedUser.friends.length
+        ? [...selectedUser.friends, authenticatedUserFriend]
+        : [authenticatedUserFriend];
 
     await updateUser(authenticatedUser);
     await updateUser(selectedUser);
@@ -100,13 +132,16 @@ const Pendings = () => {
     const customType = type;
     const receiverType = cometChat.RECEIVER_TYPE.USER;
     const customData = { message };
-    const customMessage = new cometChat.CustomMessage(receiverID, receiverType, customType, customData);
+    const customMessage = new cometChat.CustomMessage(
+      receiverID,
+      receiverType,
+      customType,
+      customData
+    );
 
     cometChat.sendCustomMessage(customMessage).then(
-      message => {
-      },
-      error => {
-      }
+      (message) => {},
+      (error) => {}
     );
   };
 
@@ -131,15 +166,15 @@ const Pendings = () => {
     const response = await fetch(url, options);
     if (response) {
       const customMessage = {
-        message: `${authenticatedUser.fullname} has accepted your friend request`,
-        type: 'friend',
-        receiverId: selectedUser.id
+        message: `${authenticatedUser.username} has accepted your friend request`,
+        type: "friend",
+        receiverId: selectedUser.id,
       };
       sendCustomMessage(customMessage);
       setHasNewFriend(true);
-      alert(`${selectedUser.fullname} was added as a friend succesfully`);
+      alert(`${selectedUser.username} was added as a friend succesfully`);
     } else {
-      alert(`Failure to add ${selectedUser.fullname} as a friend`);
+      alert(`Failure to add ${selectedUser.username} as a friend`);
     }
     setIsLoading(false);
   };
@@ -148,9 +183,16 @@ const Pendings = () => {
     if (!selectedUser) {
       return;
     }
-    const shouldAddFriend = window.confirm('Would you like to accept this request?');
+    const shouldAddFriend = window.confirm(
+      "Would you like to accept this request?"
+    );
     if (shouldAddFriend) {
-      const snapshot = await realTimeDb.ref().child('users').orderByChild('email').equalTo(selectedUser.email).once("value");
+      const snapshot = await realTimeDb
+        .ref()
+        .child("users")
+        .orderByChild("email")
+        .equalTo(selectedUser.email)
+        .once("value");
       const val = snapshot.val();
       if (val) {
         const keys = Object.keys(val);
@@ -167,9 +209,16 @@ const Pendings = () => {
     if (!selectedUser) {
       return;
     }
-    const shouldRequestRejected = window.confirm('Would you like to reject this request?');
+    const shouldRequestRejected = window.confirm(
+      "Would you like to reject this request?"
+    );
     if (shouldRequestRejected) {
-      const snapshot = await realTimeDb.ref().child('users').orderByChild('email').equalTo(selectedUser.email).once("value");
+      const snapshot = await realTimeDb
+        .ref()
+        .child("users")
+        .orderByChild("email")
+        .equalTo(selectedUser.email)
+        .once("value");
       const val = snapshot.val();
       if (val) {
         const keys = Object.keys(val);
@@ -187,8 +236,15 @@ const Pendings = () => {
   return (
     <div className="friends__pl">
       <SubHeader title={`Pending - ${users.length}`} />
-      {users.map(user => <Pending key={user.id} user={user} onAccepted={onAccepted} onRejected={onRejected} />)}
+      {users.map((user) => (
+        <Pending
+          key={user.id}
+          user={user}
+          onAccepted={onAccepted}
+          onRejected={onRejected}
+        />
+      ))}
     </div>
-  )
+  );
 };
 export default Pendings;

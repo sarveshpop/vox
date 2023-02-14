@@ -7,7 +7,7 @@ import { auth, realTimeDb } from "../../firebase";
 const SignUp = (props) => {
   const { toggleModal } = props;
 
-  const fullnameRef = useRef(null);
+  const usernameRef = useRef(null);
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const confirmPasswordRef = useRef(null);
@@ -15,24 +15,29 @@ const SignUp = (props) => {
   const { cometChat, setIsLoading } = useContext(Context);
 
   const getInputs = () => {
-    const fullname = fullnameRef.current.value;
+    const username = usernameRef.current.value;
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
     const confirmPassword = confirmPasswordRef.current.value;
-    return { fullname, email, password, confirmPassword };
+    return { username, email, password, confirmPassword };
   };
 
-  const isSignupValid = ({ fullname, email, password, confirmPassword }) => {
-    if (validator.isEmpty(fullname)) {
-      alert("Please input your fullname");
+  const isSignupValid = ({ username, email, password, confirmPassword }) => {
+    if (validator.isEmpty(username)) {
+      alert("Please input your username");
       return false;
     }
     if (!validator.isEmail(email)) {
       alert("Please input your email");
       return false;
     }
-    if (validator.isEmpty(password) || !validator.isLength(password, { min: 6 })) {
-      alert("Please input your password. You password must have at least 6 characters");
+    if (
+      validator.isEmpty(password) ||
+      !validator.isLength(password, { min: 6 })
+    ) {
+      alert(
+        "Please input your password. You password must have at least 6 characters"
+      );
       return false;
     }
     if (validator.isEmpty(confirmPassword)) {
@@ -47,54 +52,64 @@ const SignUp = (props) => {
   };
 
   const generateAvatar = () => {
-    const avatars = [
-      'https://data-us.cometchat.io/assets/images/avatars/captainamerica.png',
-      'https://data-us.cometchat.io/assets/images/avatars/cyclops.png',
-      'https://data-us.cometchat.io/assets/images/avatars/ironman.png',
-      'https://data-us.cometchat.io/assets/images/avatars/spiderman.png',
-      'https://data-us.cometchat.io/assets/images/avatars/wolverine.png'
-    ];
-    const avatarPosition = Math.floor(Math.random() * avatars.length);
-    return avatars[avatarPosition];
+    const avatar = `https://api.dicebear.com/5.x/adventurer-neutral/svg?seed=${usernameRef.current.value}`;
+
+    return avatar;
   };
 
-  const createAccount = ({ userUuid, fullname, email, userAvatar }) => {
-    return { id: userUuid, fullname, email, avatar: userAvatar }
+  const createAccount = ({ userUuid, username, email, userAvatar }) => {
+    return { id: userUuid, username, email, avatar: userAvatar };
   };
 
-  const createCometChatAccount = ({ userUuid, fullname, userAvatar }) => {
+  const createCometChatAccount = ({ userUuid, username, userAvatar }) => {
     const authKey = `${process.env.REACT_APP_COMETCHAT_AUTH_KEY}`;
     const user = new cometChat.User(userUuid);
-    user.setName(fullname);
+    user.setName(username);
     user.setAvatar(userAvatar);
     cometChat.createUser(user, authKey).then(
-      user => {
+      (user) => {
         setIsLoading(false);
-      }, error => {
+      },
+      (error) => {
         setIsLoading(false);
       }
-    )
+    );
   };
 
   const signup = () => {
-    const { fullname, email, password, confirmPassword } = getInputs();
-    if (isSignupValid({ fullname, email, password, confirmPassword })) {
+    const { username, email, password, confirmPassword } = getInputs();
+    if (isSignupValid({ username, email, password, confirmPassword })) {
       setIsLoading(true);
       const userUuid = uuidv4();
       const userAvatar = generateAvatar();
-      auth.createUserWithEmailAndPassword(email, password).then((userCrendentials) => {
-        if (userCrendentials) {
-          const createdAccount = createAccount({ userUuid, fullname, email, userAvatar });
-          realTimeDb.ref(`users/${userUuid}`).set(createdAccount).then(() => {
-            alert(`${email} was created successfully! Please sign in with your created account`);
-            createCometChatAccount({ userUuid, fullname, userAvatar });
-            toggleModal(false);
-          });
-        }
-      }).catch((error) => {
-        setIsLoading(false);
-        alert(`Cannot create your account, ${email} might be existed, please try again!`);
-      });
+      auth
+        .createUserWithEmailAndPassword(email, password)
+        .then((userCrendentials) => {
+          if (userCrendentials) {
+            const createdAccount = createAccount({
+              userUuid,
+              username,
+              email,
+              userAvatar,
+            });
+            realTimeDb
+              .ref(`users/${userUuid}`)
+              .set(createdAccount)
+              .then(() => {
+                alert(
+                  `${email} was created successfully! Please sign in with your created account`
+                );
+                createCometChatAccount({ userUuid, username, userAvatar });
+                toggleModal(false);
+              });
+          }
+        })
+        .catch((error) => {
+          setIsLoading(false);
+          alert(
+            `Cannot create your account, ${email} might be existed, please try again!`
+          );
+        });
     }
   };
 
@@ -113,7 +128,13 @@ const SignUp = (props) => {
         </div>
         <div className="signup__subtitle"></div>
         <div className="signup__form">
-          <input type="text" placeholder="Fullname" ref={fullnameRef} />
+          <input
+            type="text"
+            placeholder="username"
+            ref={usernameRef}
+            pattern="/^\S*$/"
+            title="No white space between words"
+          />
           <input type="text" placeholder="Email" ref={emailRef} />
           <input type="password" placeholder="Password" ref={passwordRef} />
           <input
@@ -128,6 +149,6 @@ const SignUp = (props) => {
       </div>
     </div>
   );
-}
+};
 
 export default SignUp;

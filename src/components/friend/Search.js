@@ -9,8 +9,10 @@ const Search = (props) => {
   return (
     <div className="add-friend__search">
       <span className="add-friend__search-title">Add Friend</span>
-      <p className="add-friend__search-sub-title">You can add a friend by searching their names!</p>
-      <input type="text" placeholder="Enter Username" onChange={onChanged} />
+      <p className="add-friend__search-sub-title">
+        You can add a friend by searching their names!
+      </p>
+      <input type="text" placeholder="Enter username" onChange={onChanged} />
     </div>
   );
 };

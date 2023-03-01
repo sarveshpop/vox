@@ -1,13 +1,17 @@
-import { useEffect, useContext } from 'react';
+import { useEffect, useContext } from "react";
 
-import { CometChatMessages } from '../../cometchat-pro-react-ui-kit/CometChatWorkspace/src';
-import Header from './Header';
-import RightSidebar from './RightSidebar';
+import { CometChatMessages } from "../../cometchat-pro-react-ui-kit/CometChatWorkspace/src";
+import Header from "./Header";
 
-import Context from '../../context';
+import Context from "../../context";
 
 const Main = () => {
-  const { cometChat, selectedChannel, selectedChannelType, setSelectedChannelType } = useContext(Context);
+  const {
+    cometChat,
+    selectedChannel,
+    selectedChannelType,
+    setSelectedChannelType,
+  } = useContext(Context);
 
   let startDirectCall = null;
 
@@ -27,30 +31,25 @@ const Main = () => {
         .setSessionID(sessionID)
         .setIsAudioOnlyCall(audioOnly)
         .build();
-      const callSceen = document.getElementById("call__screen");
-      callSceen.classList.add('call__screen--active');
+      const callScreen = document.getElementById("call__screen");
+      callScreen.classList.add("call__screen--active");
       cometChat.startCall(
         callSettings,
         document.getElementById("call__screen"),
         new cometChat.OngoingCallListener({
-          onUserListUpdated: userList => {
-          },
-          onCallEnded: call => {
-            callSceen.classList.remove('call__screen--active');
+          onUserListUpdated: (userList) => {},
+          onCallEnded: (call) => {
+            callScreen.classList.remove("call__screen--active");
             setSelectedChannelType(null);
           },
-          onError: error => {
-            callSceen.classList.remove('call__screen--active');
+          onError: (error) => {
+            callScreen.classList.remove("call__screen--active");
             setSelectedChannelType(null);
           },
-          onMediaDeviceListUpdated: deviceList => {
-          },
-          onUserMuted: (userMuted, userMutedBy) => {
-          },
-          onScreenShareStarted: () => {
-          },
-          onScreenShareStopped: () => {
-          }
+          onMediaDeviceListUpdated: (deviceList) => {},
+          onUserMuted: (userMuted, userMutedBy) => {},
+          onScreenShareStarted: () => {},
+          onScreenShareStopped: () => {},
         })
       );
     }
@@ -62,9 +61,10 @@ const Main = () => {
         <Header />
         <div className="server__container">
           <div className="server__container-body">
-            {selectedChannel && selectedChannelType === 1 && <CometChatMessages chatWithGroup={selectedChannel.guid} />}
+            {selectedChannel && selectedChannelType === 1 && (
+              <CometChatMessages chatWithGroup={selectedChannel.guid} />
+            )}
           </div>
-          <RightSidebar />
         </div>
       </div>
       <div id="call__screen"></div>

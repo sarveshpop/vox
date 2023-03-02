@@ -23,7 +23,7 @@ const Sidebar = (props) => {
           ></div>
           <img src={friend.avatar} alt="friend-avatar" />
         </div>
-        <span>{friend.name}</span>
+        <span style={{ paddingLeft: "5px" }}>{friend.name}</span>
       </div>
     </>
   );

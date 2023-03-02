@@ -32,10 +32,19 @@ input {
   display: none;
 }
 
+input[type="checkbox"] {
+  accent-color: #8555ff;
+}
+
 .login__container {
-  background-color: #f0f2f5;
-  display: grid;
-  grid-template-columns: 55% 45%;
+  background-color: #1d1e24;
+  background-image: url("https://dl.dropbox.com/s/kzvwarnhfrsoiuz/banner.png");
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  filter: brightness(0.9);
+  background-size: cover;
+  background-repeat: no-repeat;
   height: 100vh;
   width: 100vw;
 }
@@ -74,21 +83,34 @@ input {
 .login__form {
   background-color: #1d1e24;
   box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
-  padding: 1.25rem;
-  width: 24.75rem;
+  padding: 2rem;
+  width: 34.75rem;
+  border-radius: 10px;
 }
 
 .login__form input {
-  border: 1px solid #e5e7eb;
+  border: 1px solid #515358;
+  color: white;
   font-size: 1rem;
   margin-bottom: 0.75rem;
   padding: 0.875rem 1rem;
   width: 100%;
+  border-radius: 5px;
+  background-color: #1d1e24;
+}
+
+.login__form input:focus-visible {
+  border: 1.5px solid #8555ff;
+}
+
+.login_password {
+  margin-bottom: 8px !important;
 }
 
 .login__submit-btn {
   background-color: #8555ff;
   border: 0;
+  border-radius: 5px;
   color: white;
   font-size: 1rem;
   font-weight: 600;
@@ -103,12 +125,11 @@ input {
 }
 
 .login__forgot-password {
-  border-bottom: 1px solid #e5e7eb;
-  color: #2563eb;
+  color: #8555ff;
   display: block;
   font-size: 0.9375rem;
-  padding: 1.25rem 0;
-  text-align: center;
+  padding-bottom: 1.2rem;
+  text-align: start;
 }
 
 .login__forgot-password:hover {
@@ -116,11 +137,11 @@ input {
 }
 
 .login__signup {
-  color: #2563eb;
-  display: block;
+  color: #8555ff;
+  display: inline;
   font-size: 0.9375rem;
   padding: 1.25rem 0;
-  text-align: center;
+  text-align: start;
 }
 
 .login__signup:hover {
@@ -129,7 +150,7 @@ input {
 }
 
 .loading {
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(17, 17, 17, 0.8);
   display: block; /* Hidden by default */
   height: 100%; /* Full height */
   left: 0;
@@ -230,8 +251,10 @@ input {
 
 /* The Modal (background) */
 .signup {
-  background-color: rgba(255, 255, 255, 0.8);
-  display: block; /* Hidden by default */
+  background-color: rgba(10, 10, 10, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 100%; /* Full height */
   left: 0;
   /* overflow: auto; */
@@ -243,28 +266,33 @@ input {
 
 /* Modal Content/Box */
 .signup__content {
-  background-color: #fefefe;
+  background-color: #1d1e24;
   box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
   margin: 15% auto; /* 15% from the top and centered */
   margin-top: 10%;
-  width: 27rem; /* Could be more or less, depending on screen size */
+  width: 34.75rem; /* Could be more or less, depending on screen size */
+  border-radius: 10px;
 }
 
 .signup__container {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .signup__title {
-  font-size: 1.25rem;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  font-size: 1.75rem;
   font-weight: 600;
   padding: 1.25rem 0 0.5rem 1.25rem;
 }
 
 .signup__close {
+  display: flex;
+  justify-items: end;
   align-items: center;
-  display: grid;
-  justify-items: right;
   padding: 1.25rem 1.25rem 0.5rem 0;
 }
 
@@ -272,31 +300,31 @@ input {
   cursor: pointer;
 }
 
-.signup__subtitle {
-  background: #e5e7eb;
-  height: 1px;
-  margin-bottom: 0.5rem;
-  width: 100%;
-}
-
 .signup__form {
   width: 100%;
-  padding: 1.25rem;
+  padding: 2rem;
+  border-radius: 10px;
 }
 
 .signup__form input {
-  background-color: #f3f4f6;
-  border: 1px solid #e5e7eb;
-  display: block;
-  font-size: 0.9375rem;
-  margin-bottom: 0.75rem;
-  padding: 0.875rem 1rem;
+  border: 1px solid #515358;
+  color: white;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  padding: 1rem 1rem;
   width: 100%;
+  border-radius: 5px;
+  background-color: #1d1e24;
+}
+
+.signup__form input:focus-visible {
+  border: 1.5px solid #8555ff;
 }
 
 .signup__form select {
   background-color: #f3f4f6;
   border: 1px solid #e5e7eb;
+
   display: block;
   font-size: 0.9375rem;
   height: 2.625rem;
@@ -309,6 +337,7 @@ input {
 .signup__btn {
   background-color: #8555ff;
   border: 0;
+  border-radius: 5px;
   color: white;
   display: block;
   font-size: 1rem;
@@ -346,11 +375,10 @@ input {
 .header__right {
   align-items: center;
   color: white;
-  display: grid;
+  display: flex;
   grid-gap: 0.75rem;
   grid-template-columns: max-content max-content max-content;
-  justify-content: right;
-  padding-right: 0.75rem;
+  justify-content: end;
 }
 
 .header__logout {
@@ -358,7 +386,7 @@ input {
   color: white;
   display: grid;
   justify-content: right;
-  padding-right: 0.75rem;
+  padding: 0.75rem;
 }
 
 .header__right img {
@@ -375,12 +403,16 @@ input {
 .menu {
   display: flex;
   flex-direction: row;
-  padding: 1rem 0px 0.5rem 0px;
+  justify-content: start;
+  padding: 0.5rem 0px 0.5rem 3.5rem;
+  width: 250px;
+  background-color: #1d1e24;
+  border-bottom: 1px solid #323338;
 }
 
 .menu__item {
   align-items: center;
-  background: #374151;
+  /*  background: #374151; */
   border-radius: 50%;
   border-radius: 50%;
   display: grid;
@@ -392,6 +424,11 @@ input {
 .menu__item:not(:first-child):not(:last-child) {
   margin: 0.5rem 20px 1rem 20px;
 }
+
+.menu__item:not(:first-child) {
+  margin-left: 6rem;
+}
+
 .menu__item:hover {
   cursor: pointer;
   opacity: 0.8;
@@ -402,13 +439,13 @@ input {
 }
 
 .menu__item--active {
-  background: #8555ff;
+  /*   background: #8555ff; */
 }
 
 .friends__sidebar {
   background: #20232b;
   bottom: 0;
-  padding: 0px 2rem 0px 2rem;
+
   position: fixed;
   height: 100%;
   width: fit-content;
@@ -450,11 +487,16 @@ input {
   text-transform: uppercase;
 }
 
+.friends__list {
+  margin-top: 10px;
+  padding: 0px 2rem 0px 2rem;
+}
+
 .friends__list-item {
   align-items: center;
   color: #a8a9ab;
   display: grid;
-  font-size: 0.9375rem;
+  font-size: 1rem;
   font-weight: bold;
   grid-gap: 0.5rem;
   grid-template-columns: max-content max-content;
@@ -462,8 +504,8 @@ input {
 }
 
 .friends__list-item img {
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 2.75rem;
+  height: 2.75rem;
   object-fit: cover;
   border-radius: 100%;
 }
@@ -479,16 +521,17 @@ input {
 
 .friends__list-item-status {
   position: absolute;
-  width: 0.5rem;
-  height: 0.5rem;
+  width: 0.65rem;
+  height: 0.65rem;
   background: #ccc;
-  bottom: 0;
+  bottom: 5px;
   border-radius: 50%;
-  right: 0;
+  right: 2px;
+  border: 2px solid #20232b;
 }
 
 .friends__list-item-status--online {
-  background: green;
+  background: #5b9b1b;
 }
 
 .friends__main {
@@ -502,19 +545,18 @@ input {
   bottom: 0;
   overflow: auto;
   position: fixed;
-  top: 0rem;
+  top: 5rem;
   margin-left: 5rem;
   width: -webkit-fill-available;
 }
 
 .friends__main-header {
   align-items: center;
-  border-bottom: 0.1875rem solid #323338;
+  justify-content: space-between;
+  margin: 0 5rem;
   display: flex;
-  width: 100%;
   z-index: 10;
-  height: 3.5rem;
-  padding: 0 2rem;
+  padding: 0.5rem 2rem 0.5rem 2rem;
 }
 
 .friends__main-header span {
@@ -530,6 +572,19 @@ input {
 
 .friends__main-header--active {
   color: #1d1e24 !important;
+}
+
+.friends__header-left {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+}
+
+.friends__header-right {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
 }
 
 .friends__add-friend {
@@ -551,7 +606,7 @@ input {
 .not-found p {
   padding: 1rem;
   color: #a8a9ab;
-  font-size: 0.875rem;
+  font-size: 1.25rem;
 }
 
 .add-friend {
@@ -726,6 +781,7 @@ input {
   -webkit-backdrop-filter: blur(16px);
   background-color: #20232b !important;
   border-bottom: rgba(196, 201, 207, 0.6) !important;
+  border-top: 1px solid #323338;
 }
 
 .main__chat {
@@ -1317,4 +1373,8 @@ input {
 .css-12i3m1c {
   background-color: #8555ff !important;
   filter: brightness(0.8);
+}
+
+.button-active {
+  fill: #8555ff;
 }

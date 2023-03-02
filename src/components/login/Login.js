@@ -83,19 +83,48 @@ const Login = (props) => {
     <div className="login__container">
       <div className="login__form-container">
         <div className="login__form">
+          <div>
+            <p
+              style={{
+                textAlign: "center",
+                fontSize: "2.25rem",
+                paddingBottom: ".75rem",
+              }}
+            >
+              Welcome back!
+            </p>
+            <p
+              style={{
+                textAlign: "center",
+                fontSize: "1.15rem",
+                paddingBottom: "1.5rem",
+              }}
+            >
+              Log in to join the conversation
+            </p>
+          </div>
           <input
             type="text"
             placeholder="Email or phone number"
             ref={emailRef}
           />
-          <input type="password" placeholder="Password" ref={passwordRef} />
+          <input
+            type="password"
+            className="login_password"
+            placeholder="Password"
+            ref={passwordRef}
+          />
+          <span className="login__forgot-password">Forgot password?</span>
           <button className="login__submit-btn" onClick={login}>
             Login
           </button>
-          <span className="login__forgot-password">Forgot password?</span>
-          <span className="login__signup" onClick={() => toggleModal(true)}>
-            Create New Account
-          </span>
+          <p style={{ paddingTop: "1rem" }}>
+            Don't have an account?
+            <span className="login__signup" onClick={() => toggleModal(true)}>
+              {" "}
+              Register
+            </span>
+          </p>
         </div>
       </div>
     </div>

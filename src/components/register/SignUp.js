@@ -117,20 +117,26 @@ const SignUp = (props) => {
     <div className="signup">
       <div className="signup__content">
         <div className="signup__container">
-          <div className="signup__title">Sign Up</div>
-          <div className="signup__close">
-            <img
-              alt="close"
-              onClick={() => toggleModal(false)}
-              src="https://static.xx.fbcdn.net/rsrc.php/v3/y2/r/__geKiQnSG-.png"
-            />
+          <div className="signup__title" style={{ textAlign: "center" }}>
+            Create an account
+          </div>
+          <div className="signup__close" onClick={() => toggleModal(false)}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="32"
+              viewBox="0 96 960 960"
+              width="32"
+              fill="white"
+            >
+              <path d="m249 849-42-42 231-231-231-231 42-42 231 231 231-231 42 42-231 231 231 231-42 42-231-231-231 231Z" />
+            </svg>
           </div>
         </div>
-        <div className="signup__subtitle"></div>
+
         <div className="signup__form">
           <input
             type="text"
-            placeholder="username"
+            placeholder="Username"
             ref={usernameRef}
             pattern="/^\S*$/"
             title="No white space between words"
@@ -142,8 +148,48 @@ const SignUp = (props) => {
             placeholder="Confirm Password"
             ref={confirmPasswordRef}
           />
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              marginTop: "10px",
+            }}
+          >
+            <div>
+              <input
+                style={{
+                  width: "1.25rem",
+                  height: "1.25rem",
+                }}
+                className="checkbox"
+                type="checkbox"
+                id="tnc"
+                name="tnc"
+              ></input>
+            </div>
+            <div
+              style={{
+                width: "100%",
+                fontSize: "14px",
+                paddingLeft: "12px",
+                color: "grey",
+              }}
+            >
+              <span>
+                I have read the Vox's{" "}
+                <a
+                  href="https://www.termsfeed.com/live/6a553b76-190f-4f10-95c1-60112f99de78"
+                  style={{ color: "#8555ff" }}
+                >
+                  Terms of Service
+                </a>{" "}
+                and agree to sell my data and my soul to Vox.
+              </span>
+            </div>
+          </div>
           <button className="signup__btn" onClick={signup}>
-            Sign Up
+            Create Account
           </button>
         </div>
       </div>

@@ -1,19 +1,19 @@
 import { useState, useContext } from "react";
 import { CometChatMessages } from "../../cometchat-pro-react-ui-kit/CometChatWorkspace/src";
-// import Header from "../common/Header";
 import Pendings from "./Pendings";
 import Add from "./Add";
 import Context from "../../context";
+import Header from "../common/Header";
 
 const Main = () => {
-  const [selectedOption] = useState(1);
+  const [selectedOption, setSelectedOption] = useState(1);
 
-  const { selectedFriend } = useContext(Context);
+  const { selectedFriend, setSelectedFriend } = useContext(Context);
 
-  /*  const onItemSelected = (index) => {
+  const onItemSelected = (index) => {
     setSelectedOption(() => index);
     setSelectedFriend(null);
-  }; */
+  };
 
   const renderMain = () => {
     if (selectedFriend) {
@@ -29,7 +29,7 @@ const Main = () => {
 
   return (
     <div className="friends__main">
-      {/* <Header onItemSelected={onItemSelected} selectedOption={selectedOption} /> */}
+      <Header onItemSelected={onItemSelected} selectedOption={selectedOption} />
       <div className="friends__container">
         <div className="friends__container-body">{renderMain()}</div>
       </div>

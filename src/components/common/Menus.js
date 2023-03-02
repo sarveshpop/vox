@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { useHistory } from "react-router";
 import Menu from "./Menu";
 import Context from "../../context";
+import logo from "../../../src/images/logo.png";
 
 const Menus = () => {
   const {
@@ -18,27 +19,14 @@ const Menus = () => {
   const list = [
     {
       id: 1,
-      icon: (
-        <svg
-          className="w-full"
-          aria-hidden="false"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-        >
-          <path
-            fill="currentColor"
-            d="M19 21H5a1 1 0 0 1-1-1v-9H1l10.327-9.388a1 1 0 0 1 1.346 0L23 11h-3v9a1 1 0 0 1-1 1zM6 19h12V9.157l-6-5.454-6 5.454V19zm2-4h8v2H8v-2z"
-          ></path>
-        </svg>
-      ),
+      icon: <img src={logo} style={{ width: "6rem" }} alt="logo"></img>,
     },
-    {
+    /*  {
       id: 2,
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          style={{ width: "1.5rem", height: "1.5rem" }}
+          style={{ width: "2rem", height: "2rem" }}
           className="h-6 w-6"
           fill="none"
           viewBox="0 0 24 24"
@@ -52,12 +40,12 @@ const Menus = () => {
           />
         </svg>
       ),
-    },
-    {
+    }, */
+    /*     {
       id: 3,
       icon: (
         <svg
-          style={{ width: "1.5rem", height: "1.5rem" }}
+          style={{ width: "2rem", height: "2rem" }}
           xmlns="http://www.w3.org/2000/svg"
           className="h-6 w-6"
           fill="none"
@@ -72,7 +60,7 @@ const Menus = () => {
           />
         </svg>
       ),
-    },
+    }, */
   ];
 
   const logout = async () => {
@@ -93,7 +81,7 @@ const Menus = () => {
     if (item.id === 1) {
       history.push("/");
     } else if (item.id === 2) {
-      history.push("/server");
+      /*  history.push("/server"); */
     } else if (item.id === 3) {
       logout();
     }

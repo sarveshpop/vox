@@ -63,17 +63,27 @@ const Header = (props) => {
           </svg>
         </span>
       </div>
-
-      <div className="friends__header-right">
-        {user && (
-          <div className="header__right">
-            <img src={user.avatar} alt={user.email} />
-            {/* <span>Hello, {user.email}</span> */}
-          </div>
-        )}
-        <span className="header__logout" onClick={logout}>
-          <span>Logout</span>
-        </span>
+      <div className="dropdown">
+        <div className="friends__header-right dropbtn">
+          {user && (
+            <div className="header__right">
+              <img src={user.avatar} alt={user.email} />
+              <span>{user.username}</span>
+            </div>
+          )}
+        </div>
+        <div class="dropdown-content">
+          <span
+            className="header__logout"
+            onClick={logout}
+            style={{
+              display: "inline-flex",
+              justifyContent: "center",
+            }}
+          >
+            Logout
+          </span>
+        </div>
       </div>
     </div>
   );

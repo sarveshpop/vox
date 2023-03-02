@@ -36,6 +36,56 @@ input[type="checkbox"] {
   accent-color: #8555ff;
 }
 
+i {
+  background-color: white !important;
+}
+
+i:hover {
+  background-color: #8555ff !important;
+}
+
+.button:hover {
+  cursor: pointer;
+}
+
+.dropbtn {
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #20232b;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdown-content span {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+}
+
+.dropdown-content span:hover {
+  color: #303338;
+}
+
+.dropdown:hover .dropdown-content {
+  display: flex;
+  justify-content: center;
+}
+
 .login__container {
   background-color: #1d1e24;
   background-image: url("https://dl.dropbox.com/s/kzvwarnhfrsoiuz/banner.png");
@@ -296,7 +346,7 @@ input[type="checkbox"] {
   padding: 1.25rem 1.25rem 0.5rem 0;
 }
 
-.signup__close img:hover {
+.signup__close svg:hover {
   cursor: pointer;
 }
 
@@ -555,7 +605,6 @@ input[type="checkbox"] {
   justify-content: space-between;
   margin: 0 5rem;
   display: flex;
-  z-index: 10;
   padding: 0.5rem 2rem 0.5rem 2rem;
 }
 
@@ -585,6 +634,7 @@ input[type="checkbox"] {
   display: flex;
   flex-direction: row;
   justify-content: end;
+  margin-right: 2rem;
 }
 
 .friends__add-friend {
@@ -817,8 +867,8 @@ input[type="checkbox"] {
 }
 
 .input__sticky {
-  background: #393c42 !important;
-  border-top-color: #393c42 !important;
+  background: #1d1e24 !important;
+  border-top-color: #1d1e24 !important;
 }
 
 .emoji-mart-bar {
@@ -1373,6 +1423,15 @@ input[type="checkbox"] {
 .css-12i3m1c {
   background-color: #8555ff !important;
   filter: brightness(0.8);
+}
+
+.css-xizima {
+  background-color: #1d1e24 !important;
+  border-color: #1d1e24 !important;
+}
+
+.css-1gkukmo {
+  zoom: 110%;
 }
 
 .button-active {

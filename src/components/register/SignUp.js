@@ -120,7 +120,10 @@ const SignUp = (props) => {
           <div className="signup__title" style={{ textAlign: "center" }}>
             Create an account
           </div>
-          <div className="signup__close" onClick={() => toggleModal(false)}>
+          <div
+            className="signup__close button"
+            onClick={() => toggleModal(false)}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               height="32"

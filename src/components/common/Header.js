@@ -72,7 +72,7 @@ const Header = (props) => {
             </div>
           )}
         </div>
-        <div class="dropdown-content">
+        <div className="dropdown-content">
           <span
             className="header__logout"
             onClick={logout}

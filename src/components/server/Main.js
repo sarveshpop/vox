@@ -1,11 +1,16 @@
-import { useEffect, useContext } from "react";
+import { useEffect, useContext, useState } from "react";
 
 import { CometChatMessages } from "../../cometchat-pro-react-ui-kit/CometChatWorkspace/src";
-import Header from "./Header";
-
+import Header from "../common/Header";
 import Context from "../../context";
 
 const Main = () => {
+  const [selectedOption, setSelectedOption] = useState(1);
+
+  const onItemSelected = (index) => {
+    setSelectedOption(() => index);
+  };
+
   const {
     cometChat,
     selectedChannel,
@@ -58,7 +63,10 @@ const Main = () => {
   return (
     <>
       <div className="server__main">
-        <Header />
+        <Header
+          onItemSelected={onItemSelected}
+          selectedOption={selectedOption}
+        />
         <div className="server__container">
           <div className="server__container-body">
             {selectedChannel && selectedChannelType === 1 && (

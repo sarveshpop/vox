@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { useHistory } from "react-router";
+import { useHistory, useLocation } from "react-router";
 import Menu from "./Menu";
 import Context from "../../context";
 import logo from "../../../src/images/logo.png";
@@ -21,26 +21,21 @@ const Menus = () => {
       id: 1,
       icon: <img src={logo} style={{ width: "6rem" }} alt="logo"></img>,
     },
-    /*  {
+    {
       id: 2,
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          style={{ width: "2rem", height: "2rem" }}
-          className="h-6 w-6"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
+          height="40"
+          width="40"
+          fill="white"
+          viewBox="3 0 45 45"
+          style={{ marginTop: "5px", padding: "4px" }}
         >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"
-          />
+          <path d="M12 28.05h15.65v-3H12Zm0-6.5h24v-3H12Zm0-6.5h24v-3H12ZM4 44V7q0-1.15.9-2.075Q5.8 4 7 4h34q1.15 0 2.075.925Q44 5.85 44 7v26q0 1.15-.925 2.075Q42.15 36 41 36H12Zm3-7.25L10.75 33H41V7H7ZM7 7v29.75Z" />
         </svg>
       ),
-    }, */
+    },
     /*     {
       id: 3,
       icon: (
@@ -81,7 +76,7 @@ const Menus = () => {
     if (item.id === 1) {
       history.push("/");
     } else if (item.id === 2) {
-      /*  history.push("/server"); */
+      history.push("/");
     } else if (item.id === 3) {
       logout();
     }

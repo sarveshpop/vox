@@ -2,7 +2,7 @@ import { useState, useEffect, useContext, useRef, useCallback } from "react";
 import { v4 as uuidv4 } from "uuid";
 import Sidebar from "./Sidebar";
 import Context from "../../context";
-import Menus from "../common/Menus";
+import MenusFriends from "../common/MenusFriends";
 
 const Sidebars = () => {
   const [friends, setFriends] = useState([]);
@@ -139,7 +139,7 @@ const Sidebars = () => {
 
   return (
     <div className="friends__sidebar">
-      <Menus />
+      <MenusFriends />
       <div className="friends__list">
         {friends &&
           friends.map((friend) => (
